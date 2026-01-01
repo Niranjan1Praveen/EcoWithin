@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
       >
-        <div className="size-2.5 bg-green-500 rounded-full animate-pulse" />
+        <div className="size-2.5 bg-indigo-600 rounded-full animate-pulse" />
         <span>Talk. Feel. Understand Yourself</span>
       </motion.a>
       <motion.h1
@@ -80,7 +80,7 @@ const HeroSection: React.FC = () => {
           Get started
           <ArrowRight className="size-5" />
         </Button>
-        <Button className="border border-slate-400 rounded-lg px-8 h-11">
+        <Button className="border border-slate-400 rounded-lg px-8 h-11 bg-transparent">
           See How It Works
           <Play />
         </Button>

@@ -28,6 +28,14 @@ const OurTestimonials: React.FC = () => {
       image:
         "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
     },
+    {
+      quote:
+        "The design quality is top-notch. Perfect balance between simplicity and style.",
+      name: "Ganesh Martinez",
+      role: "UI/UX Designer",
+      image:
+        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+    },
   ];
 
   return (

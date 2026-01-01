@@ -12,15 +12,19 @@ const GetInTouch: React.FC = () => {
   return (
     <section className="flex flex-col items-center" id="contact">
       <SectionTitle
-        title="Get in touch"
-        description="A visual collection of our most recent works - each piece crafted with intention, emotion, and style."
+        title="Connect with Our Emotional Intelligence Team"
+        description="Have questions about emotional awareness, voice AI, or self-discovery? Our team is here to help you on your journey of understanding yourself better."
       />
 
       <form
         onSubmit={handleSubmit}
         className="grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-3xl mx-auto text-slate-400 mt-16 w-full"
       >
-        <motion.div initial={{ y: 150, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}>
+        <motion.div
+          initial={{ y: 150, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
           <label className="font-medium text-slate-200">Your name</label>
           <input
             name="name"
@@ -29,7 +33,11 @@ const GetInTouch: React.FC = () => {
           />
         </motion.div>
 
-        <motion.div initial={{ y: 150, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}>
+        <motion.div
+          initial={{ y: 150, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
           <label className="font-medium text-slate-200">Email id</label>
           <input
             name="email"

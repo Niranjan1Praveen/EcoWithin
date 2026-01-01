@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import SectionTitle from "@/components/section-title";
 import { motion } from "framer-motion";
+import { LightRays } from "@/components/ui/light-rays";
 
 interface CreationItem {
   title: string;
@@ -51,7 +52,7 @@ const OurLatestCreation: React.FC = () => {
   }, [isHovered, sectionData.length]);
 
   return (
-    <section className="flex flex-col items-center" id="creations">
+    <section className="flex flex-col items-center" id="features">
       <SectionTitle
         title="What Makes EchoWithin Special"
         description="Discover the features that transform ordinary conversation into meaningful emotional discovery — helping you understand yourself through the power of voice."
@@ -65,7 +66,7 @@ const OurLatestCreation: React.FC = () => {
         {sectionData.map((data, index) => (
           <motion.div
             key={data.title}
-            className={`relative group flex-grow h-[400px] rounded-xl overflow-hidden ${
+            className={`relative group grow h-100 rounded-xl overflow-hidden ${
               isHovered && className
                 ? "hover:w-full w-56"
                 : index === activeIndex
