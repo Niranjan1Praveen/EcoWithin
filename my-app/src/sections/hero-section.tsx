@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import TiltedImage from "@/components/tilt-image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import EmotionalAvatar from "@/components/emotional-avatar";
+import SoundWaves from "@/components/sound-waves";
 
 const HeroSection: React.FC = () => {
   return (
@@ -19,7 +22,14 @@ const HeroSection: React.FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <rect x="-92" y="-948" width="1624" height="1624" rx="812" fill="url(#a)" />
+        <rect
+          x="-92"
+          y="-948"
+          width="1624"
+          height="1624"
+          rx="812"
+          fill="url(#a)"
+        />
         <defs>
           <radialGradient
             id="a"
@@ -34,7 +44,6 @@ const HeroSection: React.FC = () => {
           </radialGradient>
         </defs>
       </motion.svg>
-
       <motion.a
         className="flex items-center mt-48 gap-2 border border-slate-600 text-gray-50 rounded-full px-4 py-2"
         initial={{ y: -20, opacity: 0 }}
@@ -42,43 +51,45 @@ const HeroSection: React.FC = () => {
         viewport={{ once: true }}
       >
         <div className="size-2.5 bg-green-500 rounded-full animate-pulse" />
-        <span>Book a live demo today</span>
+        <span>Talk. Feel. Understand Yourself</span>
       </motion.a>
-
       <motion.h1
-        className="text-center text-5xl md:text-6xl mt-4 font-semibold max-w-2xl"
+        className="text-center text-5xl md:text-6xl mt-4 font-semibold max-w-2xl leading-snug"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
       >
-        Let's build AI agents together
+        A Conversation That Listens Back to You
       </motion.h1>
-
       <motion.p
         className="text-center max-w-lg mt-2"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
       >
-        Our platform helps you build, test, and deliver faster — so you can focus on what matters.
+        Speak freely with an AI that understands your voice, your emotions, and
+        your inner world — then helps you discover what you're really feeling.
       </motion.p>
-
       <motion.div
         className="flex items-center gap-4 mt-8"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
       >
-        <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-7 h-11">
+        <Button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-7 h-11">
           Get started
           <ArrowRight className="size-5" />
-        </button>
-        <button className="border border-slate-400 rounded-lg px-8 h-11">
-          Book a demo
-        </button>
+        </Button>
+        <Button className="border border-slate-400 rounded-lg px-8 h-11">
+          See How It Works
+          <Play />
+        </Button>
       </motion.div>
-
-      <TiltedImage />
+      {/* <div className="relative w-full max-w-4xl mx-auto">
+        <SoundWaves intensity={10} />
+        <EmotionalAvatar emotion="hopeful" size="md" showCallToAction={true} />
+      </div> */}
+      <TiltedImage/>
     </section>
   );
 };

@@ -16,7 +16,7 @@ export default function Navbar() {
     const navlinks: NavLink[] = [
         {
             href: "#creations",
-            text: "Creations",
+            text: "Features",
         },
         {
             href: "#about",
@@ -63,7 +63,7 @@ export default function Navbar() {
                     <MenuIcon className="size-6.5" />
                 </button>
             </motion.nav>
-            <div className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur flex flex-col items-center justify-center text-lg gap-8 lg:hidden transition-transform duration-400 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <div className={`fixed inset-0 z-100 bg-black/60 backdrop-blur flex flex-col items-center justify-center text-lg gap-8 lg:hidden transition-transform duration-400 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 {navlinks.map((link) => (
                     <Link key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)}>
                         {link.text}

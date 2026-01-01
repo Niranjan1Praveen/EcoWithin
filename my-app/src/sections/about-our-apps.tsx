@@ -12,33 +12,43 @@ interface SectionItem {
 
 const AboutOurApps: React.FC = () => {
   const sectionData: SectionItem[] = [
-    {
-      title: "Lightning-Fast Performance",
-      description: "Built with speed — minimal load times and optimized.",
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/aboutSection/flashEmoji.png",
-      className:
-        "py-10 border-b border-slate-700 md:py-0 md:border-r md:border-b-0 md:px-10",
-    },
-    {
-      title: "Beautifully Designed Components",
-      description:
-        "Modern, pixel-perfect UI components ready for any project.",
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/aboutSection/colorsEmoji.png",
-      className:
-        "py-10 border-b border-slate-700 md:py-0 lg:border-r md:border-b-0 md:px-10",
-    },
-    {
-      title: "Plug-and-Play Integration",
-      description:
-        "Simple setup with support for React, Next.js and Tailwind css.",
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/aboutSection/puzzelEmoji.png",
-      className:
-        "py-10 border-b border-slate-700 md:py-0 md:border-b-0 md:px-10",
-    },
-  ];
+  {
+    title: "Accent-Adaptive Voice AI",
+    description: "Choose from warm, human-like accents (Indian neutral, British calm, American warm) that adapt their emotional tone during conversation for natural interaction.",
+    image: "🎤", // or use an icon/image path
+    className: "py-10 border-b border-slate-700/50 md:py-0 md:border-r md:border-b-0 md:px-10",
+  },
+  {
+    title: "Real-Time Emotional Mirror",
+    description: "Get immediate emotional patterns, mood shifts, and hidden themes (stress, hope, self-doubt, gratitude) after every conversation.",
+    image: "🪞", // or use an icon/image path
+    className: "py-10 border-b border-slate-700/50 md:py-0 lg:border-r md:border-b-0 md:px-10",
+  },
+  {
+    title: "Voice-Based Emotion Detection",
+    description: "Our AI captures emotional nuances in tone, pauses, pitch, and hesitation — going beyond text-based sentiment analysis.",
+    image: "🎭", // or use an icon/image path
+    className: "py-10 border-b border-slate-700/50 md:py-0 md:border-b-0 md:px-10",
+  },
+  {
+    title: "Happiness-Oriented Insights",
+    description: "Focus on emotional awareness, literacy, and self-connection — not therapy or problem-solving. Discover patterns that lead to greater happiness.",
+    image: "🌱", // or use an icon/image path
+    className: "py-10 border-b border-slate-700/50 md:py-0 md:border-r md:border-b-0 md:px-10",
+  },
+  {
+    title: "Personalized Emotional Patterns",
+    description: "Track how your emotional patterns evolve across sessions. Identify recurring themes, emotional spikes, and areas of growth.",
+    image: "📊", // or use an icon/image path
+    className: "py-10 border-b border-slate-700/50 md:py-0 lg:border-r md:border-b-0 md:px-10",
+  },
+  {
+    title: "Guided Emotional Awareness",
+    description: "Not just listening — guiding. Our AI helps you understand your emotions through meaningful reflections and gentle prompts.",
+    image: "🧭", // or use an icon/image path
+    className: "py-10 border-b border-slate-700/50 md:py-0 md:border-b-0 md:px-10",
+  },
+];
 
   return (
     <section className="flex flex-col items-center" id="about">

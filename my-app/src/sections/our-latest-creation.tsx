@@ -17,25 +17,25 @@ const OurLatestCreation: React.FC = () => {
 
   const sectionData: CreationItem[] = [
     {
-      title: "Prompt engineers",
+      title: "Real-Time Emotional Mirror",
       description:
-        "Bridging the gap between human intent and machine understanding through expert prompt design.",
+        "After every conversation, receive insights about your emotional state, stress levels, and hidden strengths based on your vocal patterns and sentiment.",
       image:
         "https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=800&h=400&auto=format&fit=crop",
       align: "object-center",
     },
     {
-      title: "Data scientists",
+      title: "Guided Self-Awareness",
       description:
-        "Turning data into actionable insights that drive intelligent innovation and growth.",
+        "Not just an AI listener—a guided companion that helps you understand emotions, recognize patterns, and develop greater emotional literacy through conversation.",
       image:
         "https://images.unsplash.com/photo-1714976326351-0ecf0244f0fc?q=80&w=800&h=400&auto=format&fit=crop",
       align: "object-right",
     },
     {
-      title: "Software engineers",
+      title: "Happiness-Oriented Insights",
       description:
-        "Building scalable and efficient systems that bring ideas to life through code.",
+        "Focus on growth and awareness rather than problems. Our insights highlight gratitude, hope, and emotional strengths to foster positive self-connection.",
       image:
         "https://images.unsplash.com/photo-1736220690062-79e12ca75262?q=80&w=800&h=400&auto=format&fit=crop",
       align: "object-center",
@@ -53,8 +53,8 @@ const OurLatestCreation: React.FC = () => {
   return (
     <section className="flex flex-col items-center" id="creations">
       <SectionTitle
-        title="Our latest creation"
-        description="A visual collection of our most recent works - each piece crafted with intention, emotion, and style."
+        title="What Makes EchoWithin Special"
+        description="Discover the features that transform ordinary conversation into meaningful emotional discovery — helping you understand yourself through the power of voice."
       />
 
       <div
