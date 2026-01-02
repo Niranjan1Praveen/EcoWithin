@@ -152,7 +152,7 @@ export default function TiltedImage({ rotateAmplitude = 3 }: TiltedImageProps) {
   return (
     <motion.figure
       ref={ref}
-      className="relative w-full perspective-midrange max-w-4xl mx-auto flex items-center justify-center"
+      className="relative w-full perspective-midrange max-w-4xl mx-auto items-center justify-center hidden lg:flex"
       onMouseMove={handleMouse}
       onMouseLeave={handleMouseLeave}
       initial={{ y: 150, opacity: 0 }}

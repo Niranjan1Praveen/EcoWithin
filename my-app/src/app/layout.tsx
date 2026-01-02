@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import LenisScroll from "@/components/lenis-scroll";
 import { ClerkProvider } from "@clerk/nextjs";
 const geistSans = Geist({
@@ -32,9 +30,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <LenisScroll />
-          <Navbar />
           {children}
-          <Footer />
         </body>
       </html>
     </ClerkProvider>

@@ -22,7 +22,7 @@ const OurLatestCreation: React.FC = () => {
       description:
         "After every conversation, receive insights about your emotional state, stress levels, and hidden strengths based on your vocal patterns and sentiment.",
       image:
-        "https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=800&h=400&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1763642226519-6884e2ef9f23?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       align: "object-center",
     },
     {
@@ -38,7 +38,7 @@ const OurLatestCreation: React.FC = () => {
       description:
         "Focus on growth and awareness rather than problems. Our insights highlight gratitude, hope, and emotional strengths to foster positive self-connection.",
       image:
-        "https://images.unsplash.com/photo-1736220690062-79e12ca75262?q=80&w=800&h=400&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1674767597051-37af3b73c2ca?q=80&w=1084&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       align: "object-center",
     },
   ];

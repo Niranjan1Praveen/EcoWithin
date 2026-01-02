@@ -29,12 +29,12 @@ const FaqsAndAnswers: React.FC = () => {
 
   return (
     <section
-      className="flex flex-col items-center max-w-5xl mx-auto md:flex-row justify-center gap-8 px-4 md:px-0 mt-18"
+      className="flex flex-col items-start max-w-5xl mx-auto md:flex-row justify-center gap-8 px-4 md:px-0 mt-18"
       id="faqs"
     >
       <img
         className="max-w-sm w-full rounded-xl h-auto"
-        src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?q=80&w=830&h=844&auto=format&fit=crop"
+        src="https://images.unsplash.com/photo-1585507252242-11fe632c26e8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
       />
       <motion.div

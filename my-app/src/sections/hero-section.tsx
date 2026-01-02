@@ -4,8 +4,6 @@ import TiltedImage from "@/components/tilt-image";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import EmotionalAvatar from "@/components/emotional-avatar";
-import SoundWaves from "@/components/sound-waves";
 
 const HeroSection: React.FC = () => {
   return (
@@ -54,7 +52,7 @@ const HeroSection: React.FC = () => {
         <span>Talk. Feel. Understand Yourself</span>
       </motion.a>
       <motion.h1
-        className="text-center text-5xl md:text-6xl mt-4 font-semibold max-w-2xl leading-snug"
+        className="text-center text-4xl md:text-6xl mt-4 font-semibold max-w-2xl leading-snug"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
@@ -71,7 +69,7 @@ const HeroSection: React.FC = () => {
         your inner world — then helps you discover what you're really feeling.
       </motion.p>
       <motion.div
-        className="flex items-center gap-4 mt-8"
+        className="flex flex-col md:flex-row lg:flex-row justify-center items-center gap-4 mt-8"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
@@ -80,16 +78,14 @@ const HeroSection: React.FC = () => {
           Get started
           <ArrowRight className="size-5" />
         </Button>
-        <Button className="border border-slate-400 rounded-lg px-8 h-11 bg-transparent">
+
+        <Button className="flex items-center gap-2 border border-slate-400 rounded-lg px-8 h-11 bg-transparent">
           See How It Works
           <Play />
         </Button>
       </motion.div>
-      {/* <div className="relative w-full max-w-4xl mx-auto">
-        <SoundWaves intensity={10} />
-        <EmotionalAvatar emotion="hopeful" size="md" showCallToAction={true} />
-      </div> */}
-      <TiltedImage/>
+      {/* Titled Component */}
+      <TiltedImage />
     </section>
   );
 };
