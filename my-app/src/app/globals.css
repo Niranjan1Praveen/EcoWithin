@@ -83,14 +83,14 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.1985 0.02 293.6639);
-  --sidebar-foreground: oklch(0.9053 0.0245 293.557);
-  --sidebar-primary: oklch(0.7058 0.0777 302.0489);
-  --sidebar-primary-foreground: oklch(0.2166 0.0215 292.8474);
-  --sidebar-accent: oklch(0.3181 0.0321 308.6149);
-  --sidebar-accent-foreground: oklch(0.8391 0.0692 2.6681);
-  --sidebar-border: oklch(0.2847 0.0346 291.2726);
-  --sidebar-ring: oklch(0.7058 0.0777 302.0489);
+  --sidebar: oklch(0.15 0.01 293.6639); /* Very dark grey */
+  --sidebar-foreground: oklch(0.85 0.01 293.557); /* Softer light grey text */
+  --sidebar-primary: oklch(0.5 0.04 302.0489); /* Darker accent */
+  --sidebar-primary-foreground: oklch(0.9 0.01 292.8474); /* Light text on primary */
+  --sidebar-accent: oklch(0.25 0.015 308.6149); /* Subtle dark accent */
+  --sidebar-accent-foreground: oklch(0.9 0.01 2.6681); /* Light text on accent */
+  --sidebar-border: oklch(0.2 0.01 291.2726); /* Subtle but visible border */
+  --sidebar-ring: oklch(0.5 0.04 302.0489); /* Darker ring */
 }
 
 @layer base {

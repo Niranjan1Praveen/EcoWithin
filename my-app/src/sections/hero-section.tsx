@@ -4,6 +4,7 @@ import TiltedImage from "@/components/tilt-image";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const HeroSection: React.FC = () => {
   return (
@@ -74,15 +75,18 @@ const HeroSection: React.FC = () => {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
       >
-        <Button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-7 h-11">
-          Get started
-          <ArrowRight className="size-5" />
-        </Button>
-
-        <Button className="flex items-center gap-2 border border-slate-400 rounded-lg px-8 h-11 bg-transparent">
-          See How It Works
-          <Play />
-        </Button>
+        <Link href="/sign-up">
+          <Button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-7 h-11">
+            Get started
+            <ArrowRight className="size-5" />
+          </Button>
+        </Link>
+        <Link href="https://www.youtube.com">
+          <Button className="flex items-center gap-2 border border-slate-400 rounded-lg px-8 h-11 bg-transparent">
+            See How It Works
+            <Play />
+          </Button>
+        </Link>
       </motion.div>
       {/* Titled Component */}
       <TiltedImage />

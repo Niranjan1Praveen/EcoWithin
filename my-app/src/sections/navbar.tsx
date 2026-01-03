@@ -50,13 +50,15 @@ export default function Navbar() {
         viewport={{ once: true }}
         transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }}
       >
-        <Image
-          className="h-9 w-auto"
-          src="/assets/logo.png"
-          width={138}
-          height={36}
-          alt="logo"
-        />
+        <Link href="/">
+          <Image
+            className="h-9 w-auto"
+            src="/assets/logo.png"
+            width={138}
+            height={36}
+            alt="logo"
+          />
+        </Link>
 
         <div className="hidden lg:flex items-center gap-8 transition duration-500">
           {navlinks.map((link) => (
@@ -87,7 +89,9 @@ export default function Navbar() {
           <div className="flex space-x-3">
             <UserButton />
             <Link href="/dashboard">
-              <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">To Dashboard</ShinyButton>
+              <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
+                To Dashboard
+              </ShinyButton>
             </Link>
           </div>
         </SignedIn>
