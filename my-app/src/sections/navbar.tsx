@@ -53,7 +53,7 @@ export default function Navbar() {
         <Link href="/">
           <Image
             className="h-9 w-auto"
-            src="/assets/logo.png"
+            src="/assets/logo-navbar.png"
             width={138}
             height={36}
             alt="logo"
