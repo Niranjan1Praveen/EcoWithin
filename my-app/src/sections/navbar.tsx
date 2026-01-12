@@ -86,7 +86,7 @@ export default function Navbar() {
           </div>
         </SignedOut>
         <SignedIn>
-          <div className="flex space-x-3">
+          <div className="lg:flex space-x-3 hidden">
             <UserButton />
             <Link href="/dashboard">
               <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
@@ -116,6 +116,15 @@ export default function Navbar() {
             {link.text}
           </Link>
         ))}
+        <SignedIn>
+          <div className="flex space-x-3">
+            <Link href="/dashboard">
+              <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
+                To Dashboard
+              </ShinyButton>
+            </Link>
+          </div>
+        </SignedIn>
         <Button
           onClick={() => setIsMenuOpen(false)}
           className="active:ring-3 active:ring-white aspect-square size-10 p-1 items-center justify-center bg-slate-100 hover:bg-slate-200 transition text-black rounded-md flex"

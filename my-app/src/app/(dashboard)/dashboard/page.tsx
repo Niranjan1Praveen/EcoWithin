@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import GLBLoader from "@/components/glb-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Ripple } from "@/components/ui/ripple";
 
 // ---------------- Types ----------------
 type TranscriptItem = {
@@ -22,6 +23,7 @@ export default function VapiAgent() {
 
   const [isConnected, setIsConnected] = useState(false);
   const [transcripts, setTranscripts] = useState<TranscriptItem[]>([]);
+  const [isAgentSpeaking, setIsAgentSpeaking] = useState(false); // New state for agent speaking status
 
   /* -------- Initialize Vapi SDK -------- */
   useEffect(() => {
@@ -38,7 +40,10 @@ export default function VapiAgent() {
     vapiRef.current = vapi;
 
     vapi.on("call-start", () => setIsConnected(true));
-    vapi.on("call-end", () => setIsConnected(false));
+    vapi.on("call-end", () => {
+      setIsConnected(false);
+      setIsAgentSpeaking(false); // Reset speaking state when call ends
+    });
 
     vapi.on("message", (message: any) => {
       if (message?.type === "transcript" && message.text) {
@@ -51,6 +56,15 @@ export default function VapiAgent() {
             timestamp: Date.now(),
           },
         ]);
+      }
+
+      // Check for speech-start and speech-end events
+      if (message?.type === "speech-start" && message.role === "assistant") {
+        setIsAgentSpeaking(true);
+      }
+
+      if (message?.type === "speech-end" && message.role === "assistant") {
+        setIsAgentSpeaking(false);
       }
     });
 
@@ -82,98 +96,57 @@ export default function VapiAgent() {
   const stopConversation = () => {
     try {
       vapiRef.current?.stop();
+      setIsAgentSpeaking(false); // Reset speaking state when manually stopping
     } catch (err) {
       console.error("Error stopping Vapi:", err);
     }
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
-      <div className="max-w-7xl mx-auto grid grid-rows-[auto_1fr] gap-6 h-full">
+    <div className="p-6 border-0 flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-8 max-w-4xl w-full">
         {/* Header / Controls */}
-        <Card className="p-4 border border-indigo-700 bg-black flex items-center justify-between">
-          <div className="flex flex-col">
-            <h1 className="text-xl font-semibold">Voice AI Assistant</h1>
+        <Card className="p-8 w-full flex flex-col items-center justify-center gap-6 bg-transparent border-0 text-background">
+          {/* Title and description */}
+          <div className="flex flex-col items-center text-center">
+            <h1 className="text-3xl font-bold py-2">EchoAI</h1>
             <p className="text-sm opacity-60">
               Real-time voice interaction with animated agents
             </p>
           </div>
 
-          {!isConnected ? (
-            <Button
-              onClick={startConversation}
-              className="bg-indigo-600 hover:bg-indigo-700"
-            >
-              Start Conversation
-            </Button>
-          ) : (
-            <Button
-              onClick={stopConversation}
-              className="bg-indigo-700 hover:bg-indigo-600"
-            >
-              Stop Conversation
-            </Button>
-          )}
+          {/* Button */}
+          <div className="flex flex-col items-center gap-4">
+            {!isConnected ? (
+              <Button
+                onClick={startConversation}
+                className="bg-indigo-600 hover:bg-indigo-700 px-8 py-6 text-lg"
+              >
+                Start Conversation
+              </Button>
+            ) : (
+              <Button
+                onClick={stopConversation}
+                className="bg-indigo-700 hover:bg-indigo-600 px-8 py-6 text-lg"
+              >
+                Stop Conversation
+              </Button>
+            )}
+          </div>
         </Card>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-          {/* Model 1 */}
-          <Card className="relative border border-indigo-700 bg-black rounded-lg overflow-hidden">
-            <div className="absolute top-3 left-3 z-10 text-sm opacity-70">
-              Assistant Model
+        {/* Ripple component */}
+        {/* {isConnected && (
+          <div className="w-full flex items-center justify-center">
+            <div className="relative w-full h-100 flex items-center justify-center">
+              <Ripple
+                className={`absolute inset-0 transition-opacity duration-300${
+                  isAgentSpeaking ? "opacity-100" : "opacity-30"
+                }`}
+              />
             </div>
-            <GLBLoader
-              modelPath="/assets/cutie_robo.glb"
-              scale={1.2}
-              cameraPosition={[0, 1.2, 5]}
-              autoPlay={true}
-              loop={true}
-              enableZoom={true}
-            />
-          </Card>
-
-          {/* Model 2 */}
-          <Card className="relative border border-indigo-700 bg-black rounded-lg overflow-hidden">
-            <div className="absolute top-3 left-3 z-10 text-sm opacity-70">
-              Companion Model
-            </div>
-            <GLBLoader
-              modelPath="/assets/female_robo.glb"
-              scale={1.2}
-              cameraPosition={[0, 1.2, 5]}
-              autoPlay={true}
-              loop={true}
-              enableZoom={true}
-            />
-          </Card>
-        </div>
-
-        {/* Transcript (kept commented intentionally)
-        <Card className="p-4 border border-indigo-700 bg-black">
-          <h2 className="text-lg font-semibold mb-3">Communication Log</h2>
-          <ScrollArea className="h-64 pr-4">
-            <div className="flex flex-col gap-3">
-              {transcripts.map((item) => (
-                <div
-                  key={item.id}
-                  className={`p-3 rounded-lg border ${
-                    item.role === "assistant"
-                      ? "border-indigo-700 bg-indigo-700/10"
-                      : "border-indigo-600 bg-indigo-600/10"
-                  }`}
-                >
-                  <div className="text-xs opacity-60 mb-1">
-                    {item.role === "assistant" ? "AI" : "You"} ·{" "}
-                    {new Date(item.timestamp).toLocaleTimeString()}
-                  </div>
-                  <div>{item.text}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        </Card>
-        */}
+          </div>
+        )} */}
       </div>
     </div>
   );
