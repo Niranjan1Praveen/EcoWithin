@@ -103,11 +103,11 @@ export default function VapiAgent() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen text-white p-6">
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
 
         {/* ---------- Header ---------- */}
-        <Card className="border-0 bg-black p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-white">
+        <div className="border-0 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-white">
           <div className="flex flex-col gap-1 text-white">
             <h1 className="text-2xl font-semibold tracking-tight text-white">
               Your Private Voice Space
@@ -145,7 +145,7 @@ export default function VapiAgent() {
               </Button>
             )}
           </div>
-        </Card>
+        </div>
 
         {/* ---------- Guidance Strip ---------- */}
         <div className="text-sm opacity-60 flex flex-wrap gap-x-6 gap-y-2 justify-center text-white">
