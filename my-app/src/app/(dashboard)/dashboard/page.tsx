@@ -107,7 +107,7 @@ export default function VapiAgent() {
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
 
         {/* ---------- Header ---------- */}
-        <Card className="border border-indigo-700 bg-black p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-white">
+        <Card className="border-0 bg-black p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-white">
           <div className="flex flex-col gap-1 text-white">
             <h1 className="text-2xl font-semibold tracking-tight text-white">
               Your Private Voice Space
@@ -171,14 +171,13 @@ export default function VapiAgent() {
               </span>
             </div>
 
-            <div className="h-full transition-transform duration-700 group-hover:scale-[1.02]">
-              <GLBLoader
-                modelPath="/assets/cutie_robo.glb"
-                scale={1.2}
-                cameraPosition={[0, 1.2, 5]}
-                autoPlay={true}
-                loop={true}
-                enableZoom={true}
+            <div className="h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-[1.02]">
+              <img
+                src={"https://github.com/shadcn.png"}
+                alt="User Avatar"
+                width={100}
+                height={100}
+                className="rounded-full"
               />
             </div>
           </Card>
@@ -196,14 +195,13 @@ export default function VapiAgent() {
               </span>
             </div>
 
-            <div className="h-full transition-transform duration-700 group-hover:scale-[1.02]">
-              <GLBLoader
-                modelPath="/assets/female_robo.glb"
-                scale={1.2}
-                cameraPosition={[0, 1.2, 5]}
-                autoPlay={true}
-                loop={true}
-                enableZoom={true}
+            <div className="h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-[1.02]">
+              <img
+                src={"https://github.com/shadcn.png"}
+                alt="User Avatar"
+                width={100}
+                height={100}
+                className="rounded-full"
               />
             </div>
           </Card>
@@ -215,7 +213,6 @@ export default function VapiAgent() {
           conversation ends.
         </div>
 
-        {/* Transcript intentionally kept commented */}
       </div>
     </div>
   );

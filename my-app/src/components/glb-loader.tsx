@@ -95,19 +95,10 @@ const GLBLoader: React.FC<GLBLoaderProps> = ({
       <Suspense fallback={<Html center>Loading 3D Model...</Html>}>
         <AnimatedModel 
           path={modelPath} 
-          scale={scale} 
           autoPlay={autoPlay}
           loop={loop}
         />
       </Suspense>
-      <OrbitControls 
-        enablePan={true}
-        enableZoom={enableZoom}
-        enableRotate={true}
-        minDistance={minDistance}
-        maxDistance={maxDistance}
-        zoomSpeed={zoomSpeed}
-      />
     </Canvas>
   );
 };
