@@ -51,23 +51,6 @@ const AppSidebar = async () => {
       </SidebarHeader>
       <hr />
       <SidebarContent>
-        {/* Home */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Home</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/">
-                    <Home />
-                    <span>Dashboard</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
         {/* Application */}
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -76,7 +59,7 @@ const AppSidebar = async () => {
               {/* Conversation Menu Item */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href="/dashboard">
+                  <Link href="/dashboard/conversation">
                     <MessageSquare />
                     <span>Conversation</span>
                   </Link>
@@ -89,31 +72,6 @@ const AppSidebar = async () => {
                   <Link href="/dashboard/logs">
                     <FileText />
                     <span>Logs</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        {/* Features */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Features</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/insights">
-                    <Cloud />
-                    <span>Emotional Insights</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/analytics">
-                    <Earth />
-                    <span>Analytics</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
