@@ -1,4 +1,12 @@
-import { Home, User2, ChevronUp, Cloud, Earth } from "lucide-react";
+import {
+  Home,
+  User2,
+  ChevronUp,
+  Cloud,
+  Earth,
+  MessageSquare,
+  FileText,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -43,9 +51,74 @@ const AppSidebar = async () => {
       </SidebarHeader>
       <hr />
       <SidebarContent>
+        {/* Home */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Home</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/">
+                    <Home />
+                    <span>Dashboard</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
         {/* Application */}
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {/* Conversation Menu Item */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard">
+                    <MessageSquare />
+                    <span>Conversation</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {/* Logs Menu Item */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard/logs">
+                    <FileText />
+                    <span>Logs</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Features */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Features</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/insights">
+                    <Cloud />
+                    <span>Emotional Insights</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/analytics">
+                    <Earth />
+                    <span>Analytics</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>

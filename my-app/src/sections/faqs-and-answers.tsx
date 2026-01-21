@@ -29,15 +29,21 @@ const FaqsAndAnswers: React.FC = () => {
 
   return (
     <section
-      className="flex flex-col items-start max-w-5xl mx-auto md:flex-row justify-center gap-8 px-4 md:px-0 mt-18"
+      className="flex flex-col md:flex-row items-stretch max-w-5xl mx-auto justify-center gap-8 px-4 md:px-0 mt-18"
       id="faqs"
     >
-      <img
-        className="max-w-sm w-full rounded-xl h-auto"
-        src="https://images.unsplash.com/photo-1585507252242-11fe632c26e8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt=""
-      />
+      {/* Image Container */}
+      <div className="md:w-1/2 w-full">
+        <img
+          className="w-full h-full rounded-xl object-cover"
+          src="https://images.unsplash.com/photo-1585507252242-11fe632c26e8?q=80&w=1470&auto=format&fit=crop"
+          alt=""
+        />
+      </div>
+
+      {/* FAQ Container */}
       <motion.div
+        className="md:w-1/2 w-full flex flex-col justify-center"
         initial={{ y: 150, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
@@ -51,22 +57,22 @@ const FaqsAndAnswers: React.FC = () => {
           listens to your voice patterns to provide meaningful emotional
           insights.
         </p>
+
         {faqs.map((faq, index) => (
           <div
-            className="border-b border-gray-700 py-4 cursor-pointer"
             key={index}
+            className="border-b border-gray-700 py-4 cursor-pointer"
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
             <div className="flex items-center justify-between">
               <h3 className="text-base font-medium text-white">
                 {faq.question}
               </h3>
+
               <svg
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
                 className={`${
                   openIndex === index ? "rotate-180" : ""
                 } transition-all duration-500 ease-in-out`}
@@ -80,6 +86,7 @@ const FaqsAndAnswers: React.FC = () => {
                 />
               </svg>
             </div>
+
             <p
               className={`text-sm text-gray-400 transition-all duration-500 ease-in-out max-w-md ${
                 openIndex === index
