@@ -677,6 +677,7 @@ export default function VapiAgent() {
                     <Button
                       size="sm"
                       onClick={() => setShowFullTranscript(!showFullTranscript)}
+                      className="bg-transparent"
                     >
                       {showFullTranscript ? (
                         <>
@@ -691,7 +692,7 @@ export default function VapiAgent() {
                       )}
                     </Button>
 
-                    <Button size="sm" onClick={downloadTranscript}>
+                    <Button size="sm" onClick={downloadTranscript} className="bg-transparent">
                       <Download className="h-4 w-4 mr-2" />
                       Download
                     </Button>

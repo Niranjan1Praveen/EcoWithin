@@ -1,0 +1,17 @@
+# Core web framework
+Flask==3.0.3
+
+# Transformers & ML (emotion + sentiment classification)
+transformers==4.44.2
+torch==2.4.1          # or torch==2.3.1+cpu if you want CPU-only
+
+# Numerical & scientific computing
+numpy==2.1.1
+
+# Optional but helpful for better debugging / development
+python-dotenv==1.0.1     # if you later want to use .env files
+gunicorn==23.0.0         # if you plan to deploy (optional)
+
+# Very minimal alternative if you want lighter dependencies:
+# sentence-transformers==3.1.1
+# scikit-learn==1.5.2
