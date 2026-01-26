@@ -7,13 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  age       Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Conversation {
+  id                 String   @id @default(cuid())
+  session_id         String   @unique
+  user_id            String
+  user_name          String?
+  start_time         DateTime
+  end_time           DateTime
+  total_duration     Int
+  created_at         DateTime @default(now())
+  total_messages     Int
+  user_messages      Int
+  assistant_messages Int
+  transcript_json    Json?
+  transcript_summary String   @db.VarChar(1000)
+  audio_features     Json?
+  emotion_analysis   Json?
+  emotional_summary  String?
 
-  @@map("users")
+  @@index([user_id])
+  @@index([created_at])
 }

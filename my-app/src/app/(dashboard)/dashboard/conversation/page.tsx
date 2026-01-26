@@ -14,6 +14,7 @@ import {
   Download,
   ChevronDown,
   ChevronUp,
+  Save,
 } from "lucide-react";
 import {
   Dialog,
@@ -58,7 +59,8 @@ export default function VapiAgent() {
   const [isConnecting, setIsConnecting] = useState(false);
   const [showFullTranscript, setShowFullTranscript] = useState(false);
   const [audioLevel, setAudioLevel] = useState(0);
-
+  const [sessionId, setSessionId] = useState<string>("");
+  const [conversationStartTime, setConversationStartTime] = useState<number>(0);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const [userSpeakingTimeout, setUserSpeakingTimeout] =
@@ -88,7 +90,9 @@ export default function VapiAgent() {
       setIsConnected(true);
       setIsConnecting(false);
       setIsConversationEnded(false); // Reset when new call starts
-
+      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      setSessionId(newSessionId);
+      setConversationStartTime(Date.now());
       // Reset conversation on new call
       setTranscripts([]);
       setConversation([]);
@@ -402,6 +406,53 @@ export default function VapiAgent() {
       second: "2-digit",
     });
   };
+  // Add this function inside your VapiAgent component
+  const saveConversation = async (conversationData: ConversationTurn[]) => {
+    const totalMessages = conversationData.length;
+    const userMessages = conversationData.filter(
+      (t) => t.role === "user",
+    ).length;
+    const assistantMessages = conversationData.filter(
+      (t) => t.role === "assistant",
+    ).length;
+    const duration = conversationStartTime
+      ? Date.now() - conversationStartTime
+      : 0;
+
+    const payload = {
+      session_id: sessionId,
+      start_time: new Date(conversationStartTime).toISOString(),
+      end_time: new Date().toISOString(),
+      total_duration: duration,
+      total_messages: totalMessages,
+      user_messages: userMessages,
+      assistant_messages: assistantMessages,
+      transcript_json: conversationData,
+      transcript_summary: `${totalMessages} messages conversation`,
+    };
+
+    try {
+      const response = await fetch("/api/conversation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`✅ Saved ${totalMessages} messages!`);
+        return true;
+      } else {
+        alert(`❌ Error: ${data.error}`);
+        return false;
+      }
+    } catch (error) {
+      console.error("Save error:", error);
+      alert("❌ Network error");
+      return false;
+    }
+  };
 
   return (
     <>
@@ -692,9 +743,22 @@ export default function VapiAgent() {
                       )}
                     </Button>
 
-                    <Button size="sm" onClick={downloadTranscript} className="bg-transparent">
+                    <Button
+                      size="sm"
+                      onClick={downloadTranscript}
+                      className="bg-transparent"
+                    >
                       <Download className="h-4 w-4 mr-2" />
                       Download
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => saveConversation(conversation)}
+                      disabled={conversation.length === 0}
+                      className="bg-transparent hover:bg-green-600/20"
+                    >
+                      <Save className="h-4 w-4 mr-2" />
+                      Save
                     </Button>
                   </div>
                 </div>
