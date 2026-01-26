@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, MenuIcon, XIcon } from "lucide-react";
+import { ArrowRight, Github, GithubIcon, MenuIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -59,7 +59,6 @@ export default function Navbar() {
             alt="logo"
           />
         </Link>
-
         <div className="hidden lg:flex items-center gap-8 transition duration-500">
           {navlinks.map((link) => (
             <Link
@@ -72,7 +71,7 @@ export default function Navbar() {
           ))}
         </div>
         <SignedOut>
-          <div className="space-x-3">
+          <div className="space-x-3 lg:flex items-center hidden">
             <SignUpButton>
               <Button className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 transition text-white rounded-md active:scale-95">
                 Get started
@@ -83,18 +82,35 @@ export default function Navbar() {
                 Login
               </Button>
             </SignInButton>
+            <Link
+              href="https://github.com/Niranjan1Praveen/EcoWithin.git"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+            >
+              <Github className="h-5 w-5 text-white" />
+            </Link>
           </div>
         </SignedOut>
         <SignedIn>
-          <div className="lg:flex space-x-3 hidden">
+          <div className="lg:flex items-center space-x-3 hidden">
             <UserButton />
             <Link href="/dashboard">
               <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
                 To Dashboard
               </ShinyButton>
             </Link>
+            <Link
+              href="https://github.com/Niranjan1Praveen/EcoWithin.git"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+            >
+              <Github className="h-5 w-5 text-white" />
+            </Link>
           </div>
         </SignedIn>
+
         <Button
           onClick={() => setIsMenuOpen(true)}
           className="lg:hidden active:scale-90 transition bg-transparent"
@@ -116,12 +132,42 @@ export default function Navbar() {
             {link.text}
           </Link>
         ))}
+        <SignedOut>
+          <div className="flex flex-col space-y-8 items-center">
+            <SignUpButton>
+              <Button className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 transition text-white rounded-md active:scale-95">
+                Get started
+              </Button>
+            </SignUpButton>
+            <SignInButton>
+              <Button className="hover:bg-slate-300/20 transition px-6 py-2 border border-slate-400 rounded-md active:scale-95 bg-transparent">
+                Login
+              </Button>
+            </SignInButton>
+            <Link
+              href="https://github.com/Niranjan1Praveen/EcoWithin.git"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+            >
+              <Github className="h-5 w-5 text-white" />
+            </Link>
+          </div>
+        </SignedOut>
         <SignedIn>
           <div className="flex space-x-3">
             <Link href="/dashboard">
               <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
                 To Dashboard
               </ShinyButton>
+            </Link>
+            <Link
+              href="https://github.com/Niranjan1Praveen/EcoWithin.git"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+            >
+              <Github className="h-5 w-5 text-white" />
             </Link>
           </div>
         </SignedIn>

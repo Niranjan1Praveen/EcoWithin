@@ -1,3 +1,4 @@
+import AppFooter from "@/components/app-footer";
 import AppNavbar from "@/components/app-navbar";
 import AppSidebar from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -17,6 +18,7 @@ export default async function DashboardLayout({
         <main className="w-full">
           <AppNavbar />
           <div className="px-4">{children}</div>
+          <AppFooter/>   
         </main>
       </SidebarProvider>
     </div>

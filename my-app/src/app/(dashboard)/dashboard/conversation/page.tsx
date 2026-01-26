@@ -12,8 +12,6 @@ import {
   Loader2,
   MessageSquare,
   Download,
-  Copy,
-  Check,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
@@ -24,6 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { featureCards } from "../../../../../public/assets/data/agentSteps";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 // ---------------- Types ----------------
 type TranscriptItem = {
@@ -238,7 +238,7 @@ export default function VapiAgent() {
 
   const updateConversationFromFinalTurns = () => {
     const turns: ConversationTurn[] = Array.from(
-      finalTurnsRef.current.values()
+      finalTurnsRef.current.values(),
     );
 
     // Sort by timestamp
@@ -342,7 +342,7 @@ export default function VapiAgent() {
       console.error("Error starting Vapi:", err);
       setIsConnecting(false);
       alert(
-        "Failed to start conversation. Please check your microphone permissions."
+        "Failed to start conversation. Please check your microphone permissions.",
       );
     }
   };
@@ -376,7 +376,7 @@ export default function VapiAgent() {
   const formatTranscript = () => {
     return conversation
       .map(
-        (turn) => `${turn.role === "assistant" ? "Echo" : "You"}: ${turn.text}`
+        (turn) => `${turn.role === "assistant" ? "Echo" : "You"}: ${turn.text}`,
       )
       .join("\n\n");
   };
@@ -430,19 +430,6 @@ export default function VapiAgent() {
       </Dialog>
 
       <div className="min-h-screen text-white p-6">
-        <style jsx global>{`
-          @keyframes ping {
-            75%,
-            100% {
-              transform: scale(2);
-              opacity: 0;
-            }
-          }
-          .animate-ping-fixed {
-            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-          }
-        `}</style>
-
         <div className="max-w-7xl mx-auto flex flex-col gap-8">
           {/* ---------- Header ---------- */}
           <div className="border-0 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-white">
@@ -470,10 +457,13 @@ export default function VapiAgent() {
               {!isConnected ? (
                 <Button
                   onClick={startConversation}
-                  className="bg-indigo-600 hover:bg-indigo-700"
+                  className="bg-indigo-600 hover:bg-indigo-700 border-0"
                   disabled={isConnecting}
+                  asChild
                 >
-                  {isConnecting ? "Connecting..." : "Start Conversation"}
+                  <ShinyButton>
+                    {isConnecting ? "Connecting..." : "Start Conversation"}
+                  </ShinyButton>
                 </Button>
               ) : (
                 <Button
@@ -499,10 +489,36 @@ export default function VapiAgent() {
             </div>
           </div>
 
+          {/* ---------- Features Cards ---------- */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
+            {featureCards.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={feature.id}
+                  className="rounded-xl p-4 transition-all hover:bg-gray-800/40"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`${feature.color} p-2 rounded-lg`}>
+                      <Icon className={`h-5 w-5 ${feature.iconColor}`} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white text-sm">
+                        {feature.title}
+                      </h3>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
           {/* ---------- Main Models ---------- */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1">
             {/* ---------- AI Assistant ---------- */}
-            <Card className="relative bg-transparent border min-h-100 border-indigo-700 rounded-2xl flex flex-col justify-between overflow-hidden">
+            <Card className="relative bg-transparent border-2 min-h-100 border-indigo-700 rounded-2xl flex flex-col justify-between overflow-hidden">
               <div className="flex items-center gap-2 p-4 text-sm opacity-70">
                 <Bot className="h-4 w-4" />
                 Echo
@@ -530,7 +546,7 @@ export default function VapiAgent() {
                 )}
 
                 <div
-                  className={`h-24 w-24 rounded-full border flex items-center justify-center relative transition-all duration-300 z-10 ${
+                  className={`h-24 w-24 rounded-full border-2 flex items-center justify-center relative transition-all duration-300 z-10 ${
                     isAgentSpeaking
                       ? "border-indigo-400 shadow-lg shadow-indigo-500/30 scale-105"
                       : "border-indigo-600"
@@ -554,7 +570,7 @@ export default function VapiAgent() {
             </Card>
 
             {/* ---------- User ---------- */}
-            <Card className="relative bg-transparent border min-h-100 border-indigo-700 rounded-2xl flex flex-col justify-between overflow-hidden">
+            <Card className="relative bg-transparent border-2 min-h-100 border-indigo-700 rounded-2xl flex flex-col justify-between overflow-hidden">
               <div className="flex items-center gap-2 p-4 text-sm opacity-70">
                 <User className="h-4 w-4" />
                 You
@@ -582,7 +598,7 @@ export default function VapiAgent() {
                 )}
 
                 <div
-                  className={`h-24 w-24 rounded-full border flex items-center justify-center relative transition-all duration-300 z-10 ${
+                  className={`h-24 w-24 rounded-full border-2 flex items-center justify-center relative transition-all duration-300 z-10 ${
                     isUserSpeaking && isMicOn
                       ? "border-indigo-400 shadow-lg shadow-indigo-500/30 scale-105"
                       : "border-indigo-600"
