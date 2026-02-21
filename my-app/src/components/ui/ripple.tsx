@@ -9,8 +9,8 @@ interface RippleProps extends ComponentPropsWithoutRef<"div"> {
 }
 
 export const Ripple = React.memo(function Ripple({
-  mainCircleSize = 240,
-  mainCircleOpacity = 0.35,
+  mainCircleSize = 100,
+  mainCircleOpacity = 0.45,
   numCircles = 4,
   className,
   ...props
@@ -18,7 +18,7 @@ export const Ripple = React.memo(function Ripple({
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,white,transparent)] select-none",
+        "pointer-events-none absolute inset-0 mask-[linear-gradient(to_bottom,white,transparent)] select-none",
         className
       )}
       {...props}
@@ -26,8 +26,7 @@ export const Ripple = React.memo(function Ripple({
       {Array.from({ length: numCircles }, (_, i) => {
         const size = mainCircleSize + i * 70
         const opacity = mainCircleOpacity - i * 0.03
-        const animationDelay = `${i * 0.06}s`
-        const borderStyle = "solid"
+        const animationDelay = `${i * 0.07}s`
 
         return (
           <div
@@ -40,9 +39,6 @@ export const Ripple = React.memo(function Ripple({
                 height: `${size}px`,
                 opacity,
                 animationDelay,
-                borderStyle,
-                borderWidth: "1px",
-                borderColor: `var(--foreground)`,
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%) scale(1)",

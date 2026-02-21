@@ -165,10 +165,11 @@ export default function TiltedImage({ rotateAmplitude = 3 }: TiltedImageProps) {
         style={{ rotateX, rotateY }}
       >
         {/* Ripple */}
-        <Ripple numCircles={5}/>
-
+        <div className="absolute inset-0 -z-10">
+          <Ripple numCircles={5} />
+        </div>
         {/* Floating Cards */}
-        <div className="hidden lg:block pointer-events-none absolute inset-1">
+        <div className="hidden lg:block pointer-events-none absolute inset-1 z-10">
           {FLOATING_CARDS.map((card, i) => (
             <FloatingCard
               key={card.id}

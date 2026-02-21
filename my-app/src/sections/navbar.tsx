@@ -50,7 +50,7 @@ export default function Navbar() {
         viewport={{ once: true }}
         transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }}
       >
-        <Link href="/">
+        <Link href="https://github.com/Niranjan1Praveen/EcoWithin.git">
           <Image
             className="h-9 w-auto"
             src="/assets/logo-navbar.png"

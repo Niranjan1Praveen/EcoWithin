@@ -6,6 +6,7 @@ import HeroSection from "@/sections/hero-section";
 import OurLatestFeatures from "@/sections/our-latest-features";
 import OurTestimonials from "@/sections/our-testimonials";
 import SubscribeNewsletter from "@/sections/subscribe-newsletter";
+import { WorkingDemo } from "@/sections/working-demo";
 
 function Page() {
   return (
@@ -13,6 +14,7 @@ function Page() {
       <Navbar />
       <HeroSection />
       <OurLatestFeatures />
+      <WorkingDemo/>
       <OurTestimonials />
       <FaqsAndAnswers />
       <GetInTouch />
