@@ -50,7 +50,7 @@ export default function Navbar() {
         viewport={{ once: true }}
         transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }}
       >
-        <Link href="https://github.com/Niranjan1Praveen/EcoWithin.git">
+        <Link href="/">
           <Image
             className="h-9 w-auto"
             src="/assets/logo-navbar.png"
@@ -86,7 +86,7 @@ export default function Navbar() {
               href="https://github.com/Niranjan1Praveen/EcoWithin.git"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-foreground transition-colors"
             >
               <Github className="h-5 w-5 text-white" />
             </Link>
@@ -148,7 +148,7 @@ export default function Navbar() {
               href="https://github.com/Niranjan1Praveen/EcoWithin.git"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-foreground transition-colors"
             >
               <Github className="h-5 w-5 text-white" />
             </Link>
@@ -165,7 +165,7 @@ export default function Navbar() {
               href="https://github.com/Niranjan1Praveen/EcoWithin.git"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-foreground transition-colors"
             >
               <Github className="h-5 w-5 text-white" />
             </Link>

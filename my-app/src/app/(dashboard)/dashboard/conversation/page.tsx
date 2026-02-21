@@ -406,7 +406,6 @@ export default function VapiAgent() {
       second: "2-digit",
     });
   };
-  // Add this function inside your VapiAgent component
   const saveConversation = async (conversationData: ConversationTurn[]) => {
     const totalMessages = conversationData.length;
     const userMessages = conversationData.filter(
@@ -481,7 +480,7 @@ export default function VapiAgent() {
       </Dialog>
 
       <div className="min-h-screen text-white p-6">
-        <div className="max-w-7xl mx-auto flex flex-col gap-8">
+        <div className="max-w-11/12 mx-auto flex flex-col gap-8">
           {/* ---------- Header ---------- */}
           <div className="border-0 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-white">
             <div className="flex flex-col gap-1">

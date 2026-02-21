@@ -6,6 +6,7 @@ import {
   Earth,
   MessageSquare,
   FileText,
+  ChartBarIncreasing,
 } from "lucide-react";
 
 import {
@@ -65,7 +66,15 @@ const AppSidebar = async () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-
+              {/* Analysis Menu Item */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard/analysis">
+                    <ChartBarIncreasing />
+                    <span>Analysis</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
               {/* Logs Menu Item */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
