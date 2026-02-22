@@ -38,7 +38,7 @@ A **live voice communication module** that allows users to talk naturally with E
 ---
 
 ### 🧠 2. Four-Layer Emotion Interpretation Engine
-![Emotion Insights](designs/EmotionInsights.png)  
+![Emotion Insights](designs/emotionInsights.png)  
 
 After each conversation, a sophisticated **multi-layer analysis engine** processes both content and vocal patterns:
 
@@ -105,7 +105,6 @@ A **responsive table interface** for managing all past conversations:
 ---
 
 ### 💾 5. Secure Data Storage with Supabase
-![Database Schema](designs/DatabaseSchema.png)  
 
 All conversations are securely stored in **Supabase (PostgreSQL)** with a comprehensive schema:
 - **User information**: Clerk user ID, name, and session tracking  
@@ -119,7 +118,6 @@ All conversations are securely stored in **Supabase (PostgreSQL)** with a compre
 ---
 
 ### 🧱 6. Bento Grid Experience (Frontend UX)
-![Bento Grid](designs/BentoGrid.png)  
 
 A **modern Bento-style grid layout** presenting key features and insights:  
 - Voice sessions overview  
@@ -137,21 +135,7 @@ A **modern Bento-style grid layout** presenting key features and insights:
 
 ---
 
-### 🎨 7. 3D Hero Experience
-![3D Hero](designs/Hero3D.png)  
-
-An immersive **3D GLB model** placed in the hero section to represent Echo's presence.  
-- Abstract human-like form (non-realistic)  
-- Subtle breathing and glow animations  
-- Voice-reactive sound wave visuals  
-- Emotion-based color shifts post-session  
-
-> ✨ Adds depth, emotion, and personality without the uncanny valley.
-
----
-
-### 🔐 8. User Authentication with Clerk
-![Authentication](designs/Authentication.png)  
+### 🔐 7. User Authentication with Clerk
 
 Secure user management powered by **Clerk**:
 - Sign-up, sign-in, and profile management  

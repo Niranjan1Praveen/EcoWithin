@@ -128,6 +128,9 @@ export default function ConversationAnalysis() {
       const response = await fetch(
         `http://localhost:5000/api/analyze/${sessionId}`,
       );
+      // const response = await fetch(
+      //   `https://echowithin-analysismodel.onrender.com/api/analyze/${sessionId}`,
+      // );
       const data = await response.json();
 
       if (data.success) {
