@@ -8,7 +8,7 @@
 ---
 
 ## 🌱 A Brief of the Prototype
-![Landing Page](designs/LandingPage.png)  
+![Landing Page](designs/landingPage.png)  
 
 **EchoWithin** is a full-stack **voice-first AI web application** that enables users to communicate in real time with an emotionally aware AI agent named **Echo**, speaking in a warm, natural human accent.  
 
@@ -73,7 +73,7 @@ After each conversation, a sophisticated **multi-layer analysis engine** process
 ---
 
 ### 📊 3. Comprehensive Conversation Analysis Dashboard
-![Analysis Dashboard](designs/AnalysisDashboard.png)  
+![Analysis Dashboard](designs/conversationAnalysis.png)  
 
 A rich, interactive dashboard providing **deep emotional analytics** from conversations:
 - **Overall Metrics Cards**: Dominant emotion, message count, duration, emotional shifts  
@@ -89,7 +89,7 @@ A rich, interactive dashboard providing **deep emotional analytics** from conver
 ---
 
 ### 📝 4. Conversation History & Logs
-![Conversation Logs](designs/LogsPage.png)  
+![Conversation Logs](designs/conversationLogs.png)  
 
 A **responsive table interface** for managing all past conversations:
 - **User-specific data**: Only shows conversations from the currently signed-in user (Clerk authentication)  
