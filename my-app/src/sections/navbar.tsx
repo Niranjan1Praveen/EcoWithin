@@ -95,7 +95,7 @@ export default function Navbar() {
         <SignedIn>
           <div className="lg:flex items-center space-x-3 hidden">
             <UserButton />
-            <Link href="/dashboard">
+            <Link href="/dashboard/conversation">
               <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
                 To Dashboard
               </ShinyButton>
@@ -156,7 +156,7 @@ export default function Navbar() {
         </SignedOut>
         <SignedIn>
           <div className="flex space-x-3">
-            <Link href="/dashboard">
+            <Link href="/dashboard/conversation">
               <ShinyButton className="bg-indigo-600 hover:bg-indigo-700 border-0">
                 To Dashboard
               </ShinyButton>
