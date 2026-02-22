@@ -104,7 +104,9 @@ export default function ConversationAnalysis() {
   const fetchSessions = async () => {
     try {
       setSessionsLoading(true);
-      const response = await fetch("http://localhost:5000/api/sessions");
+      // const response = await fetch("http://localhost:5000/api/sessions");
+      const response = await fetch("https://echowithin-analysismodel.onrender.com/api/sessions");
+
       const data = await response.json();
 
       if (data.success) {
@@ -125,12 +127,12 @@ export default function ConversationAnalysis() {
     setError(null);
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/analyze/${sessionId}`,
-      );
       // const response = await fetch(
-      //   `https://echowithin-analysismodel.onrender.com/api/analyze/${sessionId}`,
+      //   `http://localhost:5000/api/analyze/${sessionId}`,
       // );
+      const response = await fetch(
+        `https://echowithin-analysismodel.onrender.com/api/analyze/${sessionId}`,
+      );
       const data = await response.json();
 
       if (data.success) {
