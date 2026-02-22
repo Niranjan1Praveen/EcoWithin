@@ -23,7 +23,7 @@ Unlike text-based chatbots, EchoWithin leverages **real-time speech interaction*
 ## 🧩 Modules Overview
 
 ### 🎙️ 1. Real-Time Voice AI Conversation with Echo
-![Voice Interaction](designs/VoiceInteraction.png)  
+![Voice Interaction](designs/conversation.png)  
 
 A **live voice communication module** that allows users to talk naturally with Echo, an emotionally-aware AI companion.  
 - Real-time speech-to-text and text-to-speech using **Vapi AI**  
