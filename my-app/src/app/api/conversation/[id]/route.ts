@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+const WORKER_URL = process.env.CLOUDFLARE_WORKER_URL || "https://your-worker.your-subdomain.workers.dev";
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // For Next.js 15, params is a Promise that needs to be awaited
 export async function DELETE(
   request: NextRequest, 
-  { params }: { params: Promise<{ id: string }> } // Note: params is a Promise
+  { params }: { params: Promise<{ id: string }> }
 ) {
   console.log("✅ DELETE /api/conversation/[id] called");
   
@@ -24,24 +24,64 @@ export async function DELETE(
       );
     }
 
-    // Check if conversation exists
-    const existingConversation = await prisma.conversation.findUnique({
-      where: { id: id },
+    // Call Cloudflare Worker to delete the conversation
+    // Use the exact table name "Conversation" with capital C
+    const response = await fetch(`${WORKER_URL}/Conversation?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY!,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation',
+      },
     });
 
-    console.log("Existing conversation:", existingConversation ? "Found" : "Not found");
+    console.log("Worker response status:", response.status);
 
-    if (!existingConversation) {
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Worker DELETE error:", errorText);
+      
+      let errorDetails;
+      try {
+        errorDetails = JSON.parse(errorText);
+      } catch {
+        errorDetails = { raw: errorText };
+      }
+
+      // Handle specific error cases
+      if (response.status === 404) {
+        return NextResponse.json(
+          { 
+            success: false, 
+            error: "Conversation not found",
+            details: errorDetails 
+          },
+          { status: 404 }
+        );
+      }
+
       return NextResponse.json(
-        { success: false, error: "Conversation not found" },
-        { status: 404 }
+        { 
+          success: false, 
+          error: "Failed to delete conversation",
+          details: errorDetails,
+          status: response.status 
+        },
+        { status: response.status }
       );
     }
 
-    // Delete the conversation
-    await prisma.conversation.delete({
-      where: { id: id },
-    });
+    // Try to parse response body (might be empty for DELETE)
+    let deletedData = null;
+    const responseText = await response.text();
+    if (responseText) {
+      try {
+        deletedData = JSON.parse(responseText);
+      } catch {
+        // Ignore parsing errors for empty responses
+      }
+    }
 
     console.log(`✅ Conversation ${id} deleted successfully`);
 
@@ -49,6 +89,7 @@ export async function DELETE(
       success: true,
       message: "Conversation deleted successfully",
       id: id,
+      data: deletedData,
     });
 
   } catch (error: any) {
@@ -58,7 +99,7 @@ export async function DELETE(
       { 
         success: false,
         error: error.message || "Failed to delete conversation",
-        code: error.code 
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
       },
       { status: 500 }
     );

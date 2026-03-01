@@ -1,23 +1,49 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
-const prisma = new PrismaClient();
+const WORKER_URL = process.env.CLOUDFLARE_WORKER_URL || "https://your-worker.your-subdomain.workers.dev";
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// GET all conversations (temporarily ignore user filter)
+// GET all conversations
 export async function GET(request: NextRequest) {
   console.log("✅ GET /api/conversation called - fetching all conversations");
 
   try {
-    // Fetch ALL conversations from Supabase (no user filter for now)
-    const conversations = await prisma.conversation.findMany({
-      orderBy: { created_at: "desc" },
+    // Use capital C for table name
+    const url = new URL(`${WORKER_URL}/Conversation`);
+    url.searchParams.append('select', '*');
+    url.searchParams.append('order', 'created_at.desc');
+
+    console.log("Fetching from worker URL:", url.toString());
+
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY!,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+      },
     });
 
-    console.log(`Found ${conversations.length} total conversations`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Worker error response:", errorText);
+      
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Failed to fetch conversations",
+          details: errorText,
+        },
+        { status: response.status },
+      );
+    }
 
-    // Format the data for frontend
-    const formattedConversations = conversations.map((conv) => ({
+    const data = await response.json();
+    
+    console.log(`Found ${data.length} total conversations`);
+
+    const formattedConversations = data.map((conv: any) => ({
       id: conv.id,
       session_id: conv.session_id,
       user_id: conv.user_id,
@@ -38,27 +64,21 @@ export async function GET(request: NextRequest) {
       conversations: formattedConversations,
       count: formattedConversations.length,
     });
+    
   } catch (error: any) {
     console.error("❌ Error in GET /api/conversation:", error);
-
     return NextResponse.json(
-      {
-        success: false,
-        error: error.message || "Failed to fetch conversations",
-        code: error.code,
-      },
+      { success: false, error: error.message },
       { status: 500 },
     );
   }
 }
 
-// POST new conversation (keeping your existing POST method)
+// app/api/conversation/route.ts - Complete updated POST
+
 export async function POST(request: NextRequest) {
   try {
-    // Get Clerk auth session
     const { userId } = await auth();
-
-    // Check if user is authenticated
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized - Please sign in" },
@@ -66,10 +86,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user details from Clerk
     const user = await currentUser();
-
-    // Get user name from Clerk (fallback to email or anonymous)
     const userName =
       user?.firstName ||
       user?.username ||
@@ -80,42 +97,81 @@ export async function POST(request: NextRequest) {
 
     console.log(`Saving conversation for user: ${userId} (${userName})`);
 
-    const conversation = await prisma.conversation.create({
-      data: {
-        session_id: `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        user_id: userId, // Real Clerk user ID
-        user_name: userName, // Real user name
-        start_time: new Date(body.start_time || Date.now()),
-        end_time: new Date(body.end_time || Date.now()),
-        total_duration: body.total_duration || body.duration || 0,
-        total_messages: body.total_messages || 0,
-        user_messages: body.user_messages || 0,
-        assistant_messages: body.assistant_messages || 0,
-        transcript_json: body.transcript_json || [],
-        transcript_summary:
-          body.transcript_summary ||
-          `Conversation with ${body.total_messages || 0} messages`,
-        emotional_summary: body.emotional_summary,
+    // Helper function to generate CUID-like ID
+    function generateCuid() {
+      const timestamp = Date.now().toString(36);
+      const random = Math.random().toString(36).substring(2, 10);
+      const counter = Math.floor(Math.random() * 1000).toString(36);
+      return `c${timestamp}${random}${counter}`;
+    }
+
+    // Prepare data with ALL required fields
+    const conversationData = {
+      id: generateCuid(),
+      session_id: body.session_id || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      user_id: userId,
+      user_name: userName,
+      start_time: new Date(body.start_time || Date.now()).toISOString(),
+      end_time: new Date(body.end_time || Date.now()).toISOString(),
+      total_duration: body.total_duration || body.duration || 0,
+      created_at: new Date().toISOString(),
+      total_messages: body.total_messages || 0,
+      user_messages: body.user_messages || 0,
+      assistant_messages: body.assistant_messages || 0,
+      transcript_json: body.transcript_json || [],
+      transcript_summary:
+        body.transcript_summary ||
+        `Conversation with ${body.total_messages || 0} messages`,
+      audio_features: null,
+      emotion_analysis: null,
+      emotional_summary: body.emotional_summary || null,
+    };
+
+    console.log("Sending to worker with generated ID:", conversationData.id);
+
+    const response = await fetch(`${WORKER_URL}/Conversation`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY!,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation',
       },
+      body: JSON.stringify(conversationData),
     });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Worker POST error:", errorText);
+      
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Failed to save conversation",
+          details: errorText,
+        },
+        { status: response.status },
+      );
+    }
+
+    const savedData = await response.json();
+    const savedConversation = Array.isArray(savedData) ? savedData[0] : savedData;
 
     return NextResponse.json({
       success: true,
       message: "Conversation saved successfully!",
       data: {
-        id: conversation.id,
-        session_id: conversation.session_id,
-        user_id: conversation.user_id,
-        user_name: conversation.user_name,
+        id: savedConversation?.id,
+        session_id: savedConversation?.session_id,
+        user_id: savedConversation?.user_id,
+        user_name: savedConversation?.user_name,
       },
     });
+    
   } catch (error: any) {
-    console.error("Save error:", error);
+    console.error("❌ Save error:", error);
     return NextResponse.json(
-      {
-        error: error.message || "Failed to save conversation",
-        code: error.code,
-      },
+      { success: false, error: error.message },
       { status: 500 },
     );
   }
